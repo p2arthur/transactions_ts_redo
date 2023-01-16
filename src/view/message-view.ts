@@ -1,18 +1,11 @@
 import { View } from "./view.js";
-
-export class MessageView extends View {
+//Using generics to pass the type that will enter into the parent View <string>
+export class MessageView extends View<string> {
   template(model: string): string {
     return `
-    <p class="alert alert-info">
+    <p>
     ${model}
     </p>
-    
     `;
-  }
-
-  //The _selectorElement is being inherited from the View class by using the protected modifier
-  update(model: string): void {
-    const template = this.template(model);
-    this._selectorElement.innerHTML = template;
   }
 }

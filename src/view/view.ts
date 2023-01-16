@@ -1,4 +1,5 @@
-export class View {
+//Creating a generic type to be defined on the children
+export class View<T> {
   protected _selectorElement: HTMLElement;
 
   constructor(selectorElement: string) {
@@ -6,4 +7,8 @@ export class View {
       document.querySelector(selectorElement)
     );
   }
+  template(model: T): string {
+    throw new Error("child class has tom implement the template methods");
+  }
+  update(): void {}
 }

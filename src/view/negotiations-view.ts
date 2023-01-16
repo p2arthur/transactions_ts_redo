@@ -1,8 +1,8 @@
-import { Negotiation } from "../model/negotiation.js";
 import { Negotiations } from "../model/negotiations.js";
 import { View } from "./view.js";
 
-export class NegotiationView extends View {
+//Using generics to pass the type that will enter into the parent View <Negotiations>
+export class NegotiationView extends View<Negotiations> {
   template(negotiations: Negotiations): string {
     return `
 <table class="table table-hover table-bordered">
@@ -29,11 +29,5 @@ ${negotiations
 </tr>
 </table>
 `;
-  }
-
-  //The _selectorElement is being inherited from the View class by using the protected modifier
-  update(model: Negotiations): void {
-    const template = this.template(model);
-    this._selectorElement.innerHTML = template;
   }
 }
