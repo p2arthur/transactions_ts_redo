@@ -8,7 +8,6 @@ export class Negotiations {
   }
 
   getNegotiationList(): readonly Negotiation[] {
-    console.log(this._negotationsList);
     return this._negotationsList;
   }
 }

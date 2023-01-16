@@ -15,7 +15,7 @@ export class NegotiationController {
       document.querySelector("#quantidade")
     );
     this._inputValue = <HTMLInputElement>document.querySelector("#valor");
-    this._negotiationsView.template(this._negotiations);
+    this._negotiationsView.update(this._negotiations);
   }
 
   createNewTransaction(): Negotiation {
@@ -29,6 +29,6 @@ export class NegotiationController {
   addNewTransaction(): void {
     const negotiation = this.createNewTransaction();
     this._negotiations.addNewNegotiation(negotiation);
-    this._negotiations.getNegotiationList();
+    this._negotiationsView.update(this._negotiations);
   }
 }
