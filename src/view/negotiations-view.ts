@@ -1,12 +1,8 @@
+import { Negotiation } from "../model/negotiation.js";
 import { Negotiations } from "../model/negotiations.js";
+import { View } from "./view.js";
 
-export class NegotiationView {
-  private _element: HTMLElement;
-
-  constructor(selectorElement: string) {
-    this._element = <HTMLElement>document.querySelector(selectorElement);
-  }
-
+export class NegotiationView extends View {
   template(negotiations: Negotiations): string {
     return `
 <table class="table table-hover table-bordered">
@@ -35,7 +31,9 @@ ${negotiations
 `;
   }
 
-  update(negotiations: Negotiations) {
-    this._element.innerHTML = this.template(negotiations);
+  //The _selectorElement is being inherited from the View class by using the protected modifier
+  update(model: Negotiations): void {
+    const template = this.template(model);
+    this._selectorElement.innerHTML = template;
   }
 }
