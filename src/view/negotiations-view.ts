@@ -1,7 +1,7 @@
 import { Negotiations } from "../model/negotiations.js";
 import { View } from "./view.js";
 
-//Using generics to pass the type that will enter into the parent View <Negotiations>
+//Using generics to pass the type that will enter into the parent View <Negotiations> - (Defining the T)
 export class NegotiationView extends View<Negotiations> {
   template(negotiations: Negotiations): string {
     return `

@@ -1,5 +1,7 @@
 //Creating a generic type to be defined on the children
-export class View<T> {
+//Implementing an abstract class which means that the parent class doesn't know how it will be implemented, it's a resonsability of the children class
+export abstract class View<T> {
+  //Used the protected modifier to give access only to children classes
   protected _selectorElement: HTMLElement;
 
   constructor(selectorElement: string) {
@@ -7,8 +9,9 @@ export class View<T> {
       document.querySelector(selectorElement)
     );
   }
-  template(model: T): string {
-    throw new Error("child class has tom implement the template methods");
-  }
+
+  //Using the generic type to define the type of the model argument inside the children
+  //Implementing an abstract method meaning that the children have to implement a template method for the code to compile
+  abstract template(model: T): string;
   update(): void {}
 }
