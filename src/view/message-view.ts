@@ -3,7 +3,7 @@ import { View } from "./view.js";
 export class MessageView extends View<string> {
   template(model: string): string {
     return `
-    <p>
+    <p class="alert alert-success">
     ${model}
     </p>
     `;
