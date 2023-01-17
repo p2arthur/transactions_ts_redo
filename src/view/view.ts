@@ -13,5 +13,8 @@ export abstract class View<T> {
   //Using the generic type to define the type of the model argument inside the children
   //Implementing an abstract method meaning that the children have to implement a template method for the code to compile
   abstract template(model: T): string;
-  update(): void {}
+  update(model: T): void {
+    const template = this.template(model);
+    this._selectorElement.innerHTML = template;
+  }
 }
