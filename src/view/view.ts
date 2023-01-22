@@ -22,9 +22,9 @@ export abstract class View<T, K> {
 
   //Using the generic type to define the type of the model argument inside the children
   //Implementing an abstract method meaning that the children have to implement a template method for the code to compile
-  protected abstract template(model: T, negotiation?: K): string;
-  update(model: T, type?: K): void {
-    let template = this.template(model, type);
+  protected abstract template(model: T, className?: K): string;
+  update(model: T, className?: K): void {
+    let template = this.template(model, className);
 
     if (this.escape) {
       template = template.replace(/<script>[\s\S]*?<\/script>/, "");
