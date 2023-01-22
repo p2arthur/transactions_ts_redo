@@ -12,7 +12,7 @@ export function LogExecutionTime() {
       const t2 = performance.now();
 
       console.log(`${propertyKey}, execution time: ${(t1 - t2) / 1000}`);
-      return originalMethod;
+      return originalMethodReturn;
     };
     return descriptor;
   };
