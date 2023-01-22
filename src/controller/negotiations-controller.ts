@@ -1,3 +1,4 @@
+import { LogExecutionTime } from "../decorators/log-execution-time.js";
 import { WeekDays } from "../enums/week-days.js";
 import { Negotiation } from "../model/negotiation.js";
 import { Negotiations } from "../model/negotiations.js";
@@ -21,6 +22,7 @@ export class NegotiationController {
     this._negotiationsView.update(this._negotiations);
   }
 
+  @LogExecutionTime()
   addNewTransaction(): void {
     const negotiation = Negotiation.createOf(
       this._inputDate.value,

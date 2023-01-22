@@ -1,5 +1,7 @@
 //Creating a generic type to be defined on the children
 
+import { LogExecutionTime } from "../decorators/log-execution-time";
+
 //Implementing an abstract class which means that the parent class doesn't know how it will be implemented, it's a resonsability of the children class
 export abstract class View<T, K> {
   //Used the protected modifier to give access only to children classes
@@ -23,6 +25,7 @@ export abstract class View<T, K> {
   //Using the generic type to define the type of the model argument inside the children
   //Implementing an abstract method meaning that the children have to implement a template method for the code to compile
   protected abstract template(model: T, className?: K): string;
+  @LogExecutionTime()
   update(model: T, className?: K): void {
     let template = this.template(model, className);
 
