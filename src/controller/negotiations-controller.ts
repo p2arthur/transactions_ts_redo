@@ -1,3 +1,4 @@
+import { WeekDays } from "../enums/week-days.js";
 import { Negotiation } from "../model/negotiation.js";
 import { Negotiations } from "../model/negotiations.js";
 import { MessageView } from "../view/message-view.js";
@@ -8,8 +9,8 @@ export class NegotiationController {
   private _inputQuantity: HTMLInputElement;
   private _inputValue: HTMLInputElement;
   private _negotiations = new Negotiations();
-  private _negotiationsView = new NegotiationView("#table-container");
-  private _messageView = new MessageView("#messageView");
+  private _negotiationsView = new NegotiationView("#table-container", false);
+  private _messageView = new MessageView("#messageView", false);
 
   constructor() {
     this._inputDate = <HTMLInputElement>document.querySelector("#data");
@@ -20,18 +21,31 @@ export class NegotiationController {
     this._negotiationsView.update(this._negotiations);
   }
 
-  createNewTransaction(): Negotiation {
-    const date = new Date(this._inputDate.value.replace(/-/g, ","));
-    const quantity = parseInt(this._inputQuantity.value);
-    const value = parseFloat(this._inputValue.value);
+  addNewTransaction(): void {
+    const negotiation = Negotiation.createOf(
+      this._inputDate.value,
+      this._inputQuantity.value,
+      this._inputValue.value
+    );
 
-    return new Negotiation(date, quantity, value);
+    if (NegotiationController.isWeekDay(negotiation.date)) {
+      this._negotiations.addNewNegotiation(negotiation);
+      this._negotiationsView.update(this._negotiations, negotiation);
+      this._messageView.update("Transaction successfully added", "success");
+    } else {
+      this._messageView.update(
+        "You can only add negotiations made on business days",
+        "danger"
+      );
+      return;
+    }
   }
 
-  addNewTransaction(): void {
-    const negotiation = this.createNewTransaction();
-    this._negotiations.addNewNegotiation(negotiation);
-    this._negotiationsView.update(this._negotiations);
-    this._messageView.update("Transaction successfully added");
+  public static isWeekDay(day: Date) {
+    return (
+      day.getDay() !== WeekDays.SUNDAY &&
+      day.getDay() !== WeekDays.SATURDAY &&
+      true
+    );
   }
 }

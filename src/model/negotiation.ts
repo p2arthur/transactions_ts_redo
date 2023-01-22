@@ -21,4 +21,16 @@ export class Negotiation {
   get volume(): number {
     return this._value * this._quantity;
   }
+
+  public static createOf(
+    dateString: string,
+    quantityString: string,
+    valueString: string
+  ) {
+    const exp = /-/g;
+    const date = new Date(dateString.replace(exp, ","));
+    const quantity = parseInt(quantityString);
+    const value = parseFloat(valueString);
+    return new Negotiation(date, quantity, value);
+  }
 }
